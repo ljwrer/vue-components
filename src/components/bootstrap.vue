@@ -11,7 +11,7 @@
                 3
             </tab>
         </tabs>
-        <p>{{index}}</p>
+        <p @click="restore">{{index}}</p>
     </div>
 </template>
 
@@ -22,13 +22,21 @@
             tabs:tabset,tab
         },
         data() {
-            return  {
-                index:1
-            }
+
+        },
+        methods:{
+          restore(){
+              this.index=0
+          }
         },
         computed: {
-            index() {
-                return (this.$children.activeIndex);
+            index:{
+                get(){
+                    return (this.$refs.tab.activeIndex);
+                },
+                set(val){
+                    this.$refs.tab.activeIndex=val
+                }
             }
         },
         ready(){
