@@ -1,41 +1,38 @@
 <template>
     <div>
         <tabs v-ref:tab>
-            <tab header="one">
-                1
-            </tab>
-            <tab header="two">
-                2
-            </tab>
-            <tab header="three" disabled>
-                3
-            </tab>
+            <tab header="one">0</tab>
+            <tab header="two">1</tab>
+            <tab header="three">2</tab>
         </tabs>
-        <p @click="restore">{{index}}</p>
+        <button @click="move" type="button" class="btn btn-default">{{index}}</button>
     </div>
 </template>
 
 <script type="text/babel">
-    import {tab,tabset} from 'vue-strap'
+    import {tab, tabset} from 'vue-strap'
     export default {
         components: {
-            tabs:tabset,tab
+            tabs: tabset, tab
         },
-        data() {
-
-        },
-        methods:{
-          restore(){
-              this.index=0
-          }
+        methods: {
+            move:(function () {
+                let direction = -1;
+                return function () {
+                    if (this.index === this.$refs.tab.$children.length-1 || this.index === 0) {
+                        direction=-direction
+                    }
+                    this.index += direction
+                }
+            })()
         },
         computed: {
-            index:{
+            index: {
                 get(){
                     return (this.$refs.tab.activeIndex);
                 },
-                set(val){
-                    this.$refs.tab.activeIndex=val
+                set(index){
+                    this.$refs.tab.activeIndex = index
                 }
             }
         },
@@ -52,8 +49,18 @@
 </script>
 
 <style scoped lang="sass">
-@import "~css/bootstrap.css";
-@import "~css/bootstrap-theme.css";
+    @import "~css/bootstrap.css";
+    @import "~css/bootstrap-theme.css";
 
 
 </style>
+    <template>
+        <div>
+            <tabs v-ref:tab>
+                <tab header="one">0</tab>
+                <tab header="two">1</tab>
+                <tab header="three">2</tab>
+            </tabs>
+            <button @click="move" type="button" class="btn btn-default">{{index}}</button>
+        </div>
+    </template>
