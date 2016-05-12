@@ -51,16 +51,4 @@
 <style scoped lang="sass">
     @import "~css/bootstrap.css";
     @import "~css/bootstrap-theme.css";
-
-
 </style>
-    <template>
-        <div>
-            <tabs v-ref:tab>
-                <tab header="one">0</tab>
-                <tab header="two">1</tab>
-                <tab header="three">2</tab>
-            </tabs>
-            <button @click="move" type="button" class="btn btn-default">{{index}}</button>
-        </div>
-    </template>

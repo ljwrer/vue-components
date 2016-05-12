@@ -11,9 +11,13 @@
   },
   "dependencies": {
     "babel-runtime": "^6.0.0",
+    "mockjs": "^1.0.1-beta2",
     "vue": "^1.0.21",
+    "vue-resource": "^0.7.0",
     "vue-router": "^0.7.13",
-    "vue-strap": "^1.0.7"
+    "vue-strap": "^1.0.7",
+    "vue-tables": "^1.4.15",
+    "vuex": "^0.6.3"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -40,6 +44,7 @@
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^8.3.0",
     "vue-style-loader": "^1.0.0",
+    "vue-toastr": "^1.0.3",
     "vuestrap-base-components": "^0.8.10",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.4.0",

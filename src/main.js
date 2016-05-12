@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 /* eslint-disable no-new */
+Vue.config.debug = true
 Vue.use(VueRouter);
 const router = new VueRouter();
 router.map({
