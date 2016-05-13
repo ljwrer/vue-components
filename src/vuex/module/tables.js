@@ -4,7 +4,7 @@
 import {UPDATE_TABLE_DATA} from '../mutation-types'
 const state = {
     tableData:[],
-    index:0
+    index:1
 };
 const mutations = {
     UPDATE_TABLE_DATA(state,data){

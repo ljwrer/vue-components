@@ -3,10 +3,19 @@
  */
 import * as types from './mutation-types'
 import api from '../api'
-export const updateTable=function ({dispatch,state:{index}}) {
+import Vue from 'vue'
+export const updateTable=function ({dispatch,state:{tables:{index}}}) {
     api.getTable({index}).then(function (res) {
         dispatch(types.UPDATE_TABLE_DATA,res.data)
     },function (res) {
-        dispatch(types.UPDATE_MSG,res)
+        dispatch(types.UPDATE_MSG,JSON.stringify(res))
     })
+    // console.log(index)
+    // Vue.http('/table',{
+    //     params:{index}
+    // }).then(function (res) {
+    //     dispatch(types.UPDATE_TABLE_DATA,res.data)
+    // },function (res) {
+    //     dispatch(types.UPDATE_MSG,res)
+    // })
 };

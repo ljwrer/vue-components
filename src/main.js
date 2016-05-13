@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
+import VueCharts from 'vue-charts'
 /* eslint-disable no-new */
 Vue.config.debug = true
 Vue.use(VueRouter);
+Vue.use(VueCharts);
 const router = new VueRouter();
 router.map({
   '/:path': {
