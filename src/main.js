@@ -2,12 +2,28 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 import VueCharts from 'vue-charts'
+import VueTables from 'vue-tables'
+import tables from './components/tables.vue'
+import VueResource from 'vue-resource'
+import Vuetable from 'vuetable/src/components/Vuetable.vue';
+
+
+//
+// thirdly, register components to Vue
+//
+Vue.component('vuetable', Vuetable);
+
+Vue.use(VueResource)
 /* eslint-disable no-new */
 Vue.config.debug = true
 Vue.use(VueRouter);
 Vue.use(VueCharts);
+Vue.use(VueTables.client);
 const router = new VueRouter();
 router.map({
+    'table':{
+        component:tables
+    },
   '/:path': {
     component: {
       template: '<div>' +

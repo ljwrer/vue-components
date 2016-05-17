@@ -3,7 +3,7 @@
  */
 import {TableResource} from './resource'
 export default {
-    getTable({index},...options){
-        return TableResource.query({index},...options)
+    getTable(...options){
+        return TableResource.query(...options)
     }
 }

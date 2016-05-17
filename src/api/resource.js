@@ -4,6 +4,6 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
-const API_ROOT='/'
+export const API_ROOT='http://localhost:3000/api'
 Vue.http.options.root = API_ROOT
-export const TableResource=Vue.resource('/table{/index}')
+export const TableResource=Vue.resource('table')

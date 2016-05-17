@@ -1,7 +1,9 @@
 <template>
     <div>
         <bootstrap></bootstrap>
-        <tables></tables>
+        <a v-link="{ path: '/' }">Go to main</a>
+        <a v-link="{ path: '/table' }">Go to table</a>
+        <router-view></router-view>
         <h1>{{msg  | json 4 }}</h1>
         <!--<vue-chart-->
             <!--:chart-type="chartType"-->
@@ -10,6 +12,7 @@
             <!--:options="options"-->
         <!--&gt;</vue-chart>-->
         <echarts :option="option"></echarts>
+        <button @click="updateTable" class="btn">reload</button>
     </div>
 </template>
 
@@ -17,12 +20,15 @@
     import store from './vuex/store'
     import bootstrap from 'components/bootstrap'
     import tables from 'components/tables'
+    import tablex from 'components/tablex'
     import echarts from 'components/echarts'
     import {getMsg} from './vuex/getters'
+    import {updateTable} from './vuex/actions'
     import * as types from './vuex/mutation-types'
     export default {
         data(){
             return {
+                selected:"",
                 chartType:'PieChart',
                 columns: [
                     {
@@ -65,7 +71,7 @@
         },
         store,
         components: {
-            bootstrap, tables,echarts
+            bootstrap, tables,echarts,tablex
         },
         events: {
             'click': function (msg) {
@@ -75,8 +81,71 @@
         vuex:{
             getters:{
                 msg:getMsg
+            },
+            actions:{
+                updateTable
             }
-        }
+        },
+        route:{
+            data(){
+                console.log("data")
+            },
+            activate(){
+                console.log("activate")
+            },
+            deactivate(){
+                console.log("deactivate")
+
+            },
+            canActivate(){
+                console.log("canActivate")
+
+            },
+            canDeactivate(){
+                console.log("canDeactivate")
+
+            },
+            canReuse(){
+                console.log("canReuse")
+
+            },
+        },
+        init(){
+            console.log("init")
+
+        },
+        created(){
+            console.log("created")
+
+        },
+        beforeCompile(){
+            console.log("beforeCompile")
+
+        },
+        compiled(){
+            console.log("compiled")
+
+        },
+        ready(){
+            console.log("ready")
+            this.updateTable()
+        },
+        attached(){
+            console.log("attached")
+
+        },
+        detached(){
+            console.log("detached")
+
+        },
+        beforeDestroy(){
+            console.log("beforeDestroy")
+
+        },
+        destroyed(){
+            console.log("destroyed")
+
+        },
     }
 </script>
 

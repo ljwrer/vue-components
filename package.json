@@ -13,11 +13,12 @@
     "babel-runtime": "^6.0.0",
     "echarts": "^3.1.9",
     "mockjs": "^1.0.1-beta2",
-    "vue": "^1.0.21",
+    "vue": "^1.0.24",
     "vue-resource": "^0.7.0",
     "vue-router": "^0.7.13",
     "vue-strap": "^1.0.7",
-    "vue-tables": "^1.4.15",
+    "vue-tables": "^1.4.17",
+    "vuetable": "^1.1.0",
     "vuex": "^0.6.3"
   },
   "devDependencies": {
