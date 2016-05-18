@@ -1,92 +1,47 @@
 <template>
     <div>
-        <bootstrap></bootstrap>
-        <a v-link="{ path: '/' }">Go to main</a>
-        <a v-link="{ path: '/table' }">Go to table</a>
-        <router-view></router-view>
-        <h1>{{msg  | json 4 }}</h1>
-        <!--<vue-chart-->
-            <!--:chart-type="chartType"-->
-            <!--:columns="columns"-->
-            <!--:rows="rows"-->
-            <!--:options="options"-->
-        <!--&gt;</vue-chart>-->
-        <echarts :option="option"></echarts>
-        <button @click="updateTable" class="btn">reload</button>
+        <ready-table :columns="column" :table-data="readyData" ></ready-table>
+        <order-table :columns="column" :table-data="orderData"></order-table>
+        <!--<scroll-table :columns="column" :table-data="tableData"></scroll-table>-->
+        <!--<scroll-table :columns="column" :table-data="tableData"></scroll-table>-->
+
     </div>
 </template>
 
 <script type="text/babel">
+    import ReadyTable from './components/ReadyTable'
+    import OrderTable from './components/OrderTable'
     import store from './vuex/store'
-    import bootstrap from 'components/bootstrap'
-    import tables from 'components/tables'
-    import tablex from 'components/tablex'
-    import echarts from 'components/echarts'
-    import {getMsg} from './vuex/getters'
-    import {updateTable} from './vuex/actions'
     import * as types from './vuex/mutation-types'
+    import  {readyData,orderData} from './vuex/getters'
+    import {updateReady} from './vuex/actions'
+    import bus from './bus'
     export default {
         data(){
-            return {
-                selected:"",
-                chartType:'PieChart',
-                columns: [
-                    {
-                    'type': 'string',
-                    'label': 'Topping'
-                    },
-                    {
-                    'type': 'number',
-                    'label': 'Slices'
-                    }
-                ],
-                rows:[
-                    ['Mushrooms', 3],
-                    ['Onions', 1],
-                    ['Olives', 1],
-                    ['Zucchini', 1],
-                    ['Pepperoni', 2]
-                ],
-                options: {
-                    'title':'How Much Pizza I Ate Last Night',
-                    'width':400,
-                    'height':300,
-                    is3D:true
-                },
-                sub:['chart/bar','component/tooltip','component/title'],
-                option:{
-                    title: { text: 'ECharts 入门示例' },
-                    tooltip: {},
-                    xAxis: {
-                        data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-                    },
-                    yAxis: {},
-                    series: [{
-                        name: '销量',
-                        type: 'bar',
-                        data: [5, 20, 36, 10, 10, 20]
-                    }]
-                }
-            }
+            return {}
         },
         store,
         components: {
-            bootstrap, tables,echarts,tablex
+            ReadyTable,OrderTable
         },
-        events: {
-            'click': function (msg) {
-                store.dispatch(types.UPDATE_MSG,msg.value)
+        events: {},
+        computed: {
+            column(){
+                return this.readyData[0]?Object.keys(this.readyData[0]):[]
             }
         },
-        vuex:{
-            getters:{
-                msg:getMsg
+        methods:{
+
+        },
+        vuex: {
+            getters: {
+                readyData
             },
-            actions:{
-                updateTable
+            actions: {
+                updateReady
             }
         },
-        route:{
+        route: {
             data(){
                 console.log("data")
             },
@@ -116,7 +71,6 @@
         },
         created(){
             console.log("created")
-
         },
         beforeCompile(){
             console.log("beforeCompile")
@@ -128,7 +82,7 @@
         },
         ready(){
             console.log("ready")
-            this.updateTable()
+            this.updateReady();
         },
         attached(){
             console.log("attached")

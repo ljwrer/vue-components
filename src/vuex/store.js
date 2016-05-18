@@ -4,21 +4,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import tables from './module/tables'
-import {UPDATE_MSG} from './mutation-types'
+import sendCar from './module/sendCar'
 Vue.use(Vuex);
-const state={
-    msg:null
-}
 const modules={
-    tables
+    tables,sendCar
 };
-const mutations={
-    UPDATE_MSG(state,msg){
-        state.msg=msg
-    }
-}
 const store=new Vuex.Store({
-  modules,state,mutations
+  modules
 });
 window.store=store;
 export default store

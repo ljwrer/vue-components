@@ -7,3 +7,4 @@ Vue.use(VueResource)
 export const API_ROOT='http://localhost:3000/api'
 Vue.http.options.root = API_ROOT
 export const TableResource=Vue.resource('table')
+export const OrderResource=Vue.resource('order')
