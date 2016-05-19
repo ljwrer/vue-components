@@ -3,6 +3,7 @@
         <ready-table :columns="readyColumn" :table-data="readyData" ></ready-table>
         <order-table v-if="orderData.length" :columns="orderColumn" :table-data="orderData"></order-table>
         <picker-table v-if="pickerData.length" :columns="pickerColumn" :table-data="pickerData"></picker-table>
+        <p>{{allPickedAge}}</p>
     </div>
 </template>
 
@@ -12,7 +13,7 @@
     import PickerTable from './components/PickerTable'
     import store from './vuex/store'
     import * as types from './vuex/mutation-types'
-    import  {readyData,orderData,pickerData} from './vuex/getters'
+    import  {readyData,orderData,pickerData,allPickedAge} from './vuex/getters'
     import {updateReady} from './vuex/actions'
     import bus from './bus'
     export default {
@@ -42,7 +43,7 @@
         },
         vuex: {
             getters: {
-               readyData,orderData,pickerData
+               readyData,orderData,pickerData,allPickedAge
             },
             actions: {
                 updateReady

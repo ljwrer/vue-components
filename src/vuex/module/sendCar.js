@@ -39,13 +39,6 @@ const mutations = {
     [REMOVE_PICKED](state,id){
         state.picked=state.picked.filter((group)=>!(group.id===id))
     },
-    // [DELETE_PICKED](state,id){
-    //     state.picked=state.picked.forEach((group)=>{
-    //         group.data=group.data.filter((order)=>{
-    //             return !(order.id===id)
-    //         })
-    //     })
-    // }
     [DELETE_PICKED](state,data,index){
         data.splice(index,1)
     }

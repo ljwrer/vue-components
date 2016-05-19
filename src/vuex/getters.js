@@ -10,3 +10,9 @@ export const orderData=state=>{
     return ret
 };
 export  const pickerData=state=>state.sendCar.picked;
+export const allPickedAge=state=>
+    state.sendCar.picked.reduce(
+        (prev,group)=>prev+group.data.reduce(
+            (prev,item)=>prev+item.age,0
+        ),0
+    );

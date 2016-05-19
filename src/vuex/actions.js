@@ -32,16 +32,17 @@ export const getDetail=function ({dispatch,state:{sendCar:{order}}},id) {
     }
 };
 export const toggleOrder=function ({dispatch},group) {
+    const copyGroup=Object.assign({},group);
+    copyGroup.data=[].concat(copyGroup.data);
     dispatch(types.TOGGLE_PICK,group);
     if(group.picked){
-        dispatch(types.ADD_PICKED,group)
+        dispatch(types.ADD_PICKED,copyGroup)
     }else{
         dispatch(types.REMOVE_PICKED,group.id)
     }
 };
 
 export const deletePicker=function ({dispatch},data,index) {
-    //TODO 删除触发order bug
     dispatch(types.DELETE_PICKED,data,index);
 }
 
