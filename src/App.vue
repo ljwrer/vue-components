@@ -1,19 +1,18 @@
 <template>
     <div>
-        <ready-table :columns="column" :table-data="readyData" ></ready-table>
-        <order-table :columns="column" :table-data="orderData"></order-table>
-        <!--<scroll-table :columns="column" :table-data="tableData"></scroll-table>-->
-        <!--<scroll-table :columns="column" :table-data="tableData"></scroll-table>-->
-
+        <ready-table :columns="readyColumn" :table-data="readyData" ></ready-table>
+        <order-table v-if="orderData.length" :columns="orderColumn" :table-data="orderData"></order-table>
+        <picker-table v-if="pickerData.length" :columns="pickerColumn" :table-data="pickerData"></picker-table>
     </div>
 </template>
 
 <script type="text/babel">
     import ReadyTable from './components/ReadyTable'
     import OrderTable from './components/OrderTable'
+    import PickerTable from './components/PickerTable'
     import store from './vuex/store'
     import * as types from './vuex/mutation-types'
-    import  {readyData,orderData} from './vuex/getters'
+    import  {readyData,orderData,pickerData} from './vuex/getters'
     import {updateReady} from './vuex/actions'
     import bus from './bus'
     export default {
@@ -22,84 +21,36 @@
         },
         store,
         components: {
-            ReadyTable,OrderTable
+            ReadyTable,OrderTable,PickerTable
         },
         events: {},
         computed: {
-            column(){
-                return this.readyData[0]?Object.keys(this.readyData[0]):[]
+            readyColumn(){
+                return this.getColumn(this.readyData)
+            },
+            orderColumn(){
+                return this.getColumn(this.orderData&&this.orderData[0]?this.orderData[0].data:null)
+            },
+            pickerColumn(){
+                return this.getColumn(this.pickerData&&this.pickerData[0]?this.pickerData[0].data:null)
             }
         },
         methods:{
-
+            getColumn(data){
+                return data&&data[0]?Object.keys(data[0]):[]
+            }
         },
         vuex: {
             getters: {
-                readyData
+               readyData,orderData,pickerData
             },
             actions: {
                 updateReady
             }
         },
-        route: {
-            data(){
-                console.log("data")
-            },
-            activate(){
-                console.log("activate")
-            },
-            deactivate(){
-                console.log("deactivate")
-
-            },
-            canActivate(){
-                console.log("canActivate")
-
-            },
-            canDeactivate(){
-                console.log("canDeactivate")
-
-            },
-            canReuse(){
-                console.log("canReuse")
-
-            },
-        },
-        init(){
-            console.log("init")
-
-        },
-        created(){
-            console.log("created")
-        },
-        beforeCompile(){
-            console.log("beforeCompile")
-
-        },
-        compiled(){
-            console.log("compiled")
-
-        },
         ready(){
-            console.log("ready")
             this.updateReady();
-        },
-        attached(){
-            console.log("attached")
-
-        },
-        detached(){
-            console.log("detached")
-
-        },
-        beforeDestroy(){
-            console.log("beforeDestroy")
-
-        },
-        destroyed(){
-            console.log("destroyed")
-
-        },
+        }
     }
 </script>
 

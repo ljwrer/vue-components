@@ -8,12 +8,19 @@
                         {{column}}
                         <div>{{column}}</div>
                     </th>
+                    <th>
+                        operation
+                        <div>operation</div>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="data in tableData" @click="getDetail(data.id)">
-                    <td v-for="item in data">{{item}}</td>
-                </tr>
+                <template v-for="group in tableData">
+                    <tr  v-for="data in group.data">
+                        <td v-for="item in data">{{item}}</td>
+                        <td><button @click="deletePicker(group.data,$index)">delete</button></td>
+                    </tr>
+                </template>
                 </tbody>
             </table>
         </div>
@@ -79,8 +86,7 @@
     }
 </style>
 <script>
-    import {orderData} from '../vuex/getters'
-    import {getDetail} from '../vuex/actions'
+    import {deletePicker} from '../vuex/actions'
     export default{
         props:{
             columns:{
@@ -93,11 +99,8 @@
             }
         },
         vuex:{
-            getters:{
-                orderData
-            },
             actions:{
-                getDetail
+                deletePicker
             }
         }
     }

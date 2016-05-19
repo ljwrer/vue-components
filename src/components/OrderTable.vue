@@ -4,7 +4,8 @@
             <table>
                 <thead>
                 <tr class="header">
-                    <th><div><input type="checkbox"></div></th>
+                    <!--<th><div><input type="checkbox"></div></th>-->
+                    <th></th>
                     <th v-for="column in columns">
                         {{column}}
                         <div>{{column}}</div>
@@ -12,10 +13,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="data in tableData" @click="">
-                    <td><input type="checkbox"></td>
-                    <td v-for="item in data">{{item}}</td>
-                </tr>
+                <template v-for="group in tableData">
+                    <tr  v-for="data in group.data">
+                        <td v-if="$index===0" :rowspan="group.data.length">
+                            <input type="checkbox" :checked="group.picked" @change="toggleOrder(group)" >
+                        </td>
+                        <td v-for="item in data">{{item}}</td>
+                    </tr>
+                </template>
                 </tbody>
             </table>
         </div>
@@ -81,7 +86,7 @@
     }
 </style>
 <script>
-    import bus from '../bus'
+    import {toggleOrder} from '../vuex/actions'
     export default{
         props:{
             columns:{
@@ -93,8 +98,10 @@
                 require:true
             }
         },
-        methods:{
-
+        vuex:{
+            actions:{
+                toggleOrder
+            }
         }
     }
 </script>
