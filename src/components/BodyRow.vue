@@ -1,6 +1,11 @@
 <template>
     <tr  @click="options.handle.click" :class="options.status">
-        <slot></slot>
+        <!--<template v-if="1">-->
+            <!--<slot></slot>-->
+        <!--</template>-->
+        <td v-if="before">
+            <slot></slot>
+        </td>
         <td v-if="options.checkBox">
             <input type="checkbox" @change="options.handle.check">
         </td>
@@ -17,14 +22,19 @@
 
 </style>
 <script>
-    import BButton from 'BButton'
-    import BTag from 'BTag'
+    import BButton from './BButton'
+    import BTag from './BTag'
     export default{
         props:{
-            rowData,options
+            before:null,
+            rowData:null,
+            options:null
         },
         components:{
-            BButton
+            BButton,BTag
+        },
+        ready(){
+            console.log(1)
         }
     }
 </script>
