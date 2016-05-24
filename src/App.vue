@@ -3,6 +3,7 @@
         <ready-table :columns="readyColumn" :table-data="readyData" ></ready-table>
         <order-table v-if="orderData.length" :columns="orderColumn" :table-data="orderData"></order-table>
         <picker-table v-if="pickerData.length" :columns="pickerColumn" :table-data="pickerData"></picker-table>
+
         <p>{{allPickedAge}}</p>
     </div>
 </template>
@@ -22,7 +23,7 @@
         },
         store,
         components: {
-            ReadyTable,OrderTable,PickerTable
+            ReadyTable,OrderTable,PickerTable,DemoTable
         },
         events: {},
         computed: {
@@ -41,6 +42,7 @@
                 return data&&data[0]?Object.keys(data[0]):[]
             }
         },
+        events
         vuex: {
             getters: {
                readyData,orderData,pickerData,allPickedAge

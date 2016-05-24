@@ -1,10 +1,12 @@
 <template>
-    <button @click="onClick"><slot></slot></button>
+    <span :class="type"><slot></slot></span>
 </template>
+<style>
+</style>
 <script>
     export default{
         props:{
-            onClick
+            type
         }
     }
 </script>

@@ -8,7 +8,7 @@
                         {{column}}
                         <div>{{column}}</div>
                     </th>
-                    <th>
+                    <th v-if="tableData.length">
                         operation
                         <div>operation</div>
                     </th>
@@ -87,6 +87,7 @@
 </style>
 <script>
     import {deletePicker} from '../vuex/actions'
+    import bus from '../bus'
     export default{
         props:{
             columns:{
@@ -96,6 +97,11 @@
             tableData:{
                 type:Array,
                 require:true
+            }
+        },
+        methods:{
+            deletePicker:function () {
+                bus.$emit("",group.data,$index)
             }
         },
         vuex:{

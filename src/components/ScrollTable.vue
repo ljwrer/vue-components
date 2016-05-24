@@ -3,19 +3,21 @@
         <div class="container">
             <table>
                 <thead>
-                <tr class="header">
-                    <th><div><input type="checkbox"></div></th>
-                    <th v-for="column in columns">
-                        {{column}}
-                        <div>{{column}}</div>
-                    </th>
-                </tr>
+                <tr is="slot" name="tHead" columns="columns"></tr>
+                <!--<tr class="header">-->
+                    <!--<th><div><input type="checkbox"></div></th>-->
+                    <!--<th v-for="column in columns">-->
+                        <!--{{column}}-->
+                        <!--<div>{{column}}</div>-->
+                    <!--</th>-->
+                <!--</tr>-->
                 </thead>
                 <tbody>
-                <tr v-for="data in tableData" @click="pickHandler(data.id)">
-                    <td><input type="checkbox"></td>
-                    <td v-for="item in data">{{item}}</td>
-                </tr>
+                <tr is="slot" name="tBody" tableData="tableData"></tr>
+                <!--<tr v-for="data in tableData" @click="pickHandler(data.id)">-->
+                    <!--<td><input type="checkbox"></td>-->
+                    <!--<td v-for="item in data">{{item}}</td>-->
+                <!--</tr>-->
                 </tbody>
             </table>
         </div>
@@ -81,26 +83,9 @@
     }
 </style>
 <script>
-    import bus from '../bus'
     export default{
         props:{
-            columns:{
-                type:Array,
-                require:true
-            },
-            tableData:{
-                type:Array,
-                require:true
-            },
-            pickHandler:{
-                type:Function,
-                default:function () {}
-            }
-        },
-        methods:{
-//            pick(data){
-//                bus.$emit('table-row-pick',data);
-//            }
+            columns, tableData
         }
     }
 </script>
