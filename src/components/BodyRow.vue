@@ -1,30 +1,77 @@
 <template>
-    <tr  @click="options.handle.click" :class="options.status">
-        <slot></slot>
-        <td v-if="options.checkBox">
-            <input type="checkbox" @change="options.handle.check">
+    <tr @click="onRowClick(rowIndex)" :class="statusType" :row-index="rowIndex">
+        <td v-if="hasBefore" :rowspan="rowSpan">
+            <slot></slot>
+        </td>
+        <td v-if="hasCheckBox">
+            <input type="checkbox" :checked="checked" @change="onCheck(checked,rowIndex)">
         </td>
         <td v-for="row in rowData">{{row}}</td>
-        <td v-if="options.status">
-            <b-tag type="options.status.type">{{options.status.text}}</b-tag>
+        <td v-if="statusType">
+            <b-tag type="statusType">{{statusText}}</b-tag>
         </td>
-        <td v-for="operate in options.operate">
+        <td v-for="operate in operates">
             <b-button on-click="operate.handle">{{operate.text}}</b-button>
         </td>
     </tr>
 </template>
-<style>
-
+<style scoped>
+    td + td {
+        border-left:1px solid #eee;
+    }
+    td{
+        border-bottom:1px solid #eee;
+        background: #ddd;
+        color: #000;
+        padding: 10px 25px;
+    }
 </style>
-<script>
-    import BButton from 'BButton'
-    import BTag from 'BTag'
+<script type="text/babel">
+    import BButton from './BButton'
+    import BTag from './BTag'
     export default{
-        props:{
-            rowData,options
+        props: {
+            onRowClick: {
+                type: Function,
+//                default:()=>{}
+            },
+            statusType: {
+                type: String,
+                default: ''
+            },
+            statusText: {
+                type: String
+            },
+            rowIndex: {
+                type: Number
+            },
+            rowSpan: {
+                type: Number
+            },
+            hasCheckBox: {
+                type: Boolean,
+                default: false
+            },
+            checked: {
+                type: Boolean,
+                default: false
+            },
+            onCheck: {
+                type: Function
+            },
+            rowData: {
+                type: [Array, Object]
+            },
+            operates: {
+                type: [Array, Object]
+            },
+            hasBefore:{
+                type:Boolean,
+                default:false
+            }
         },
-        components:{
-            BButton
+        components: {
+            BButton, BTag
         }
     }
 </script>

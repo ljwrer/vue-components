@@ -1,54 +1,109 @@
 <template>
     <div>
-        <ready-table :columns="readyColumn" :table-data="readyData" ></ready-table>
-        <order-table v-if="orderData.length" :columns="orderColumn" :table-data="orderData"></order-table>
-        <picker-table v-if="pickerData.length" :columns="pickerColumn" :table-data="pickerData"></picker-table>
-
-        <p>{{allPickedAge}}</p>
+        <b-table :columns="columns" :table-data="readyData" :on-body-row-click="getDetail"></b-table>
+        <b-group-table :columns="columns" :table-data="orderData"></b-group-table>
     </div>
+    <!--<table>-->
+        <!--<tbody v-for="group in groupList">-->
+            <!--<tr is="body-row-group" v-for="data in group.data" :row-data="data" :index="$index" :length="group.data.length"></tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
 </template>
 
 <script type="text/babel">
-    import ReadyTable from './components/ReadyTable'
-    import OrderTable from './components/OrderTable'
-    import PickerTable from './components/PickerTable'
+    import BTable from './components/BTable'
+    import BGroupTable from './components/BGroupTable'
+    import lifeCycle from './mixin/lifeCycle'
     import store from './vuex/store'
     import * as types from './vuex/mutation-types'
     import  {readyData,orderData,pickerData,allPickedAge} from './vuex/getters'
-    import {updateReady} from './vuex/actions'
-    import bus from './bus'
+    import {updateReady,getDetail} from './vuex/actions'
     export default {
+        mixins:[lifeCycle],
         data(){
-            return {}
+            return {
+                list:{
+                    name:"Ray",
+                    age:18
+                },
+                groupList:[
+                    {
+                        data:[
+                            {
+                                name:"Ray",
+                                age:18
+                            },
+                            {
+                                name:"Ray",
+                                age:18
+                            },
+                            {
+                                name:"Ray",
+                                age:18
+                            },
+                            {
+                                name:"Ray",
+                                age:18
+                            }
+                        ]
+                    },
+                    {
+                        data:[
+                            {
+                                name:"Ray",
+                                age:18
+                            },
+                            {
+                                name:"Ray",
+                                age:18
+                            },
+                            {
+                                name:"Ray",
+                                age:18
+                            },
+                            {
+                                name:"Ray",
+                                age:18
+                            }
+                        ]
+                    },
+                    {
+                        data:[
+                            {
+                                name:"Ray",
+                                age:18
+                            },
+                            {
+                                name:"Ray",
+                                age:18
+                            },
+                            {
+                                name:"Ray",
+                                age:18
+                            },
+                            {
+                                name:"Ray",
+                                age:18
+                            }
+                        ]
+                    }
+                ],
+                columns:['id','name','age']
+            }
         },
         store,
         components: {
-            ReadyTable,OrderTable,PickerTable,DemoTable
+            BTable,BGroupTable
         },
-        events: {},
-        computed: {
-            readyColumn(){
-                return this.getColumn(this.readyData)
-            },
-            orderColumn(){
-                return this.getColumn(this.orderData&&this.orderData[0]?this.orderData[0].data:null)
-            },
-            pickerColumn(){
-                return this.getColumn(this.pickerData&&this.pickerData[0]?this.pickerData[0].data:null)
-            }
+        computed:{
+
         },
-        methods:{
-            getColumn(data){
-                return data&&data[0]?Object.keys(data[0]):[]
-            }
-        },
-        events
         vuex: {
             getters: {
                readyData,orderData,pickerData,allPickedAge
             },
             actions: {
-                updateReady
+                updateReady,getDetail
             }
         },
         ready(){

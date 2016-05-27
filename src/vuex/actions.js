@@ -15,7 +15,8 @@ export const updateReady=function ({dispatch}) {
         dispatch(types.UPDATE_READY,res.data.list)
     })
 };
-export const getDetail=function ({dispatch,state:{sendCar:{order}}},id) {
+export const getDetail=function ({dispatch,state:{sendCar:{order,ready}}},index) {
+    const id=ready[index].id;
     const searchOrderGroupIndex=order.findIndex(group=>id===group.id);
     if(searchOrderGroupIndex>-1){
         dispatch(types.SWITCH_ORDER_CACHE,searchOrderGroupIndex)
