@@ -20,6 +20,13 @@
             :operate="true"
             operate-text="操作">
         </b-group-table>
+        <div class="test">
+            <div class="item item1"></div>
+            <div class="item item2"></div>
+            <div class="item item3"></div>
+            <div class="item item4"></div>
+            <div class="item item5"></div>
+        </div>
     </div>
     <!--<table>-->
         <!--<tbody v-for="group in groupList">-->
@@ -71,6 +78,12 @@
     }
 </script>
 
-<style>
-
+<style lang="stylus" rel="stylesheet/stylus">
+    .test
+        display: flex
+        .item
+            flex: 1
+            margin: 20px
+            height: 50px
+            background: deepskyblue
 </style>
