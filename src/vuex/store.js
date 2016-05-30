@@ -3,11 +3,10 @@
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
-import tables from './module/tables'
 import sendCar from './module/sendCar'
 Vue.use(Vuex);
 const modules={
-    tables,sendCar
+    sendCar
 };
 const store=new Vuex.Store({
   modules

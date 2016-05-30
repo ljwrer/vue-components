@@ -3,11 +3,28 @@
         <div class="container">
             <table>
                 <thead>
-                <tr is="header-row" :columns="columns" :has-before="true"></tr>
+                <tr
+                    is="header-row"
+                    :columns="columns"
+                    :has-before="hasBefore"
+                    :operate="operate"
+                    :operate-text="operateText">
+                </tr>
                 </thead>
-                <tbody v-for="group in tableData" :groupIndex="$index">
-                    <tr is="body-row-group" v-for="data in group.data"  :row-data="data" :on-row-click="onBodyRowClick" :on-check-all="onCheckAll" :row-index="$index" :group-index="groupIndex"  :row-span="group.data.length">
-
+                <tbody
+                    v-for="(groupIndex,group) in tableData">
+                    <tr
+                        is="body-row-group"
+                        v-for="data in group.data"
+                        :has-check-box="hasCheckBox"
+                        :check-all="group.picked"
+                        :row-data="data"
+                        :on-row-click="onBodyRowClick"
+                        :on-check-all="onCheckAll"
+                        :row-index="$index"
+                        :group-index="groupIndex"
+                        :row-span="group.data.length"
+                        :operates="operates">
                     </tr>
                 </tbody>
             </table>
@@ -31,6 +48,14 @@
                     return []
                 }
             },
+            hasBefore:{
+                type:Boolean,
+                default:true
+            },
+            hasCheckBox:{
+                type:Boolean,
+                default:true
+            },
             onBodyRowClick: {
                 type: Function,
                 default(){
@@ -43,6 +68,16 @@
             onCheckAll:{
                 type:Function,
                 default(){}
+            },
+            operate:{
+                type:Boolean,
+                default:false
+            },
+            operateText:{
+                type:String
+            },
+            operates:{
+                type:Array
             }
         },
         components: {

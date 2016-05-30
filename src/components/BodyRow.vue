@@ -11,7 +11,7 @@
             <b-tag type="statusType">{{statusText}}</b-tag>
         </td>
         <td v-for="operate in operates">
-            <b-button on-click="operate.handle">{{operate.text}}</b-button>
+            <b-button :on-click="operate.handle" :args="[groupIndex,rowIndex]">{{operate.text}}</b-button>
         </td>
     </tr>
 </template>
@@ -43,6 +43,9 @@
                 type: String
             },
             rowIndex: {
+                type: Number
+            },
+            groupIndex: {
                 type: Number
             },
             rowSpan: {

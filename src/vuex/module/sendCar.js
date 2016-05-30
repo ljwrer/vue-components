@@ -42,7 +42,7 @@ const mutations = {
     [DELETE_PICKED](state,data,index){
         data.splice(index,1)
     }
-}
+};
 export default {
     state,mutations
 };

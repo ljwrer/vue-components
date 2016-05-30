@@ -1,12 +1,14 @@
 <template>
     <tr class="header">
         <th v-if="hasBefore"><div></div></th>
-        <th v-if="checkbox"><input type="checkbox" :checked="checked" @change="onCheck(checked)"></th>
+        <th v-if="checkbox"><input type="checkbox" :checked="checked" @change="onCheck(e.target.value)"></th>
         <th v-for="column in columns">
             {{column}}
             <div>{{column}}</div>
         </th>
-        <th v-if="operate">{{operateText}}</th>
+        <th v-if="operate">{{operateText}}
+            <div>{{operateText}}</div>
+        </th>
     </tr>
 </template>
 <style>

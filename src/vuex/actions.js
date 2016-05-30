@@ -32,7 +32,8 @@ export const getDetail=function ({dispatch,state:{sendCar:{order,ready}}},index)
         })
     }
 };
-export const toggleOrder=function ({dispatch},group) {
+export const toggleOrder=function ({dispatch,state:{sendCar:{order,orderCacheIndex}}}) {
+    const group=order[orderCacheIndex];
     const copyGroup=Object.assign({},group);
     copyGroup.data=[].concat(copyGroup.data);
     dispatch(types.TOGGLE_PICK,group);
@@ -43,8 +44,8 @@ export const toggleOrder=function ({dispatch},group) {
     }
 };
 
-export const deletePicker=function ({dispatch},data,index) {
-    dispatch(types.DELETE_PICKED,data,index);
-}
+export const deletePicker=function ({dispatch,state:{sendCar:{picked}}},groupIndex,index) {
+    dispatch(types.DELETE_PICKED,picked[groupIndex].data,index);
+};
 
 

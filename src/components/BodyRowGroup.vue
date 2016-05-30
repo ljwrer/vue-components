@@ -1,6 +1,17 @@
 <template>
-    <body-row :row-data="rowData" :has-before="rowIndex===0" :row-span="rowSpan" :on-row-click="onRowClick">
-        <input  v-if="rowIndex===0" :checked="checkAll" type="checkbox" @change="onCheckAll(rowIndex,groupIndex)">
+    <body-row
+        :row-data="rowData"
+        :has-before="hasCheckBox&&rowIndex===0"
+        :row-span="rowSpan"
+        :on-row-click="onRowClick"
+        :row-index="rowIndex"
+        :group-index="groupIndex"
+        :operates="operates">
+        <input
+            v-if="hasCheckBox&&rowIndex===0"
+            :checked="checkAll"
+            type="checkbox"
+            @change="onCheckAll"/>
     </body-row>
 </template>
 <style>
